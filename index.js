@@ -1,28 +1,3 @@
-/**********************************************************
- * @INFO  [TABLE OF CONTENTS]
- * 1  Import_Modules
- * 1.1 Validating script for advertisement
- * 2  CREATE_THE_DISCORD_BOT_CLIENT
- * 3  Load_Discord_Buttons_and_Discord_Menus
- * 4  Create_the_client.memer
- * 5  create_the_languages_objects
- * 6  Raise_the_Max_Listeners
- * 7  Define_the_Client_Advertisments
- * 8  LOAD_the_BOT_Functions
- * 9  Login_to_the_Bot
- * 
- *   BOT CODED BY: TOMato6966 | https://milrato.eu
- *********************************************************/
-
-
-/**
- * @param {*} INFO: you can use config.token and all other sensitve api keys, with the exact same key in process.env!
-*/
-
-
-/**********************************************************
- * @param {1} Import_Modules for this FIle
- *********************************************************/
 const Discord = require("discord.js");
 const colors = require("colors");
 const enmap = require("enmap"); 
@@ -34,10 +9,6 @@ const { delay } = require("./handlers/functions");
 const Meme = require("memer-api");
 require('dotenv').config();
 
-
-/**********************************************************
- * @param {2} CREATE_THE_DISCORD_BOT_CLIENT with some default settings
- *********************************************************/
 const client = new Discord.Client({
   fetchAllMembers: false,
   restTimeOffset: 0,
@@ -70,39 +41,16 @@ const client = new Discord.Client({
   }
 });
 
-
-
-/**********************************************************
- * @param {4} Create_the_client.memer property from Tomato's Api 
- *********************************************************/
 client.memer = new Meme(process.env.memer_api || config.memer_api); // GET a TOKEN HERE: https://discord.gg/Mc2FudJkgP
-
-
-
-/**********************************************************
- * @param {5} create_the_languages_objects to select via CODE
- *********************************************************/
 client.la = { }
 var langs = fs.readdirSync("./languages")
 for(const lang of langs.filter(file => file.endsWith(".json"))){
   client.la[`${lang.split(".json").join("")}`] = require(`./languages/${lang}`)
 }
 Object.freeze(client.la)
-//function "handlemsg(txt, options? = {})" is in /handlers/functions 
-
-
-
-/**********************************************************
- * @param {6} Raise_the_Max_Listeners to 0 (default 10)
- *********************************************************/
 client.setMaxListeners(0);
 require('events').defaultMaxListeners = 0;
 
-
-
-/**********************************************************
- * @param {7} Define_the_Client_Advertisments from the Config File
- *********************************************************/
 client.ad = {
   enabled: advertisement.adenabled,
   statusad: advertisement.statusad,
@@ -140,19 +88,4 @@ function requirehandlers(){
 
 //24/7
 require('./server')();
-
-/**********************************************************
- * @param {9} Login_to_the_Bot
- *********************************************************/
 client.login(process.env.token || config.token);
-
-
-/**********************************************************
- * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention him / Milrato Development, when using this Code!
- * @INFO
- *********************************************************/
