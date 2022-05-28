@@ -26,9 +26,9 @@ module.exports = {
       if(user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["daily"]["variable1"]))
       
       //ensure the economy data
-      ensure_economy_user(client, message.guild.id, user.id)
+      ensure_economy_user(client, user.id)
       //get the economy data 
-      let data = client.economy.get(`${message.guild.id}-${user.id}`)
+      let data = client.economy.get(`${user.id}`)
       //get the delays
       let timeout = 86400000;
       //if the user is on delay return some error
@@ -47,11 +47,11 @@ module.exports = {
         let amount = Math.floor(amountarray[Math.floor((Math.random() * amountarray.length))]);
         amount = amount * data.black_market.boost.multiplier
         //add the Money to the User's Balance in this Guild
-        client.economy.math(`${message.guild.id}-${message.author.id}`, "+", amount, "balance")
+        client.economy.math(`${message.author.id}`, "+", amount, "balance")
         //set the current time to the db
-        client.economy.set(`${message.guild.id}-${message.author.id}`, Date.now(), "daily")
+        client.economy.set(`${message.author.id}`, Date.now(), "daily")
         //get the new data
-        data = client.economy.get(`${message.guild.id}-${message.author.id}`)
+        data = client.economy.get(`${message.author.id}`)
         //return some message!
         return message.reply({embeds: [new MessageEmbed()
           .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
@@ -70,12 +70,3 @@ module.exports = {
     }
   }
 };
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention him / Milrato Development, when using this Code!
- * @INFO
- */

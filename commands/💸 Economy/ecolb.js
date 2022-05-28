@@ -25,7 +25,7 @@ module.exports = {
         var user = message.author;
         
       //ensure the economy data
-      ensure_economy_user(client, message.guild.id, user.id)
+      ensure_economy_user(client, user.id)
         var users = client.economy.keyArray().filter(i => String(i).startsWith(message.guild.id));
         var datas = [];
         for(const user of users)
@@ -213,12 +213,3 @@ module.exports = {
     }
   }
 };
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention him / Milrato Development, when using this Code!
- * @INFO
- */

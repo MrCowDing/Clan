@@ -26,9 +26,9 @@ module.exports = {
       if(user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["dice"]["variable1"]))
       
       //ensure the economy data
-      ensure_economy_user(client, message.guild.id, user.id)
+      ensure_economy_user(client, user.id)
       //get the economy data 
-      let data = client.economy.get(`${message.guild.id}-${user.id}`)
+      let data = client.economy.get(`${user.id}`)
       //get the delays
       
       var roll = args[0] //Should be a number between 1 and 6
@@ -66,9 +66,9 @@ module.exports = {
         //double the amount
         amount *= 4; 
         //write the DB
-        client.economy.math(`${message.guild.id}-${message.author.id}`, "+", amount, "balance");
+        client.economy.math(`${message.author.id}`, "+", amount, "balance");
         //get the latest data
-        data = client.economy.get(`${message.guild.id}-${message.author.id}`);
+        data = client.economy.get(`${message.author.id}`);
         //send the Information Message
         message.reply({embeds: [new MessageEmbed()
           .setTitle(eval(client.la[ls]["cmds"]["economy"]["dice"]["variable8"]))
@@ -77,9 +77,9 @@ module.exports = {
         ]})
       } else {
         //write the DB
-        client.economy.math(`${message.guild.id}-${message.author.id}`, "-", amount, "balance")
+        client.economy.math(`${message.author.id}`, "-", amount, "balance")
         //get the latest data
-        data = client.economy.get(`${message.guild.id}-${message.author.id}`)
+        data = client.economy.get(`${message.author.id}`)
         //send the Information Message
         message.reply({embeds: [new MessageEmbed()
           .setTitle(eval(client.la[ls]["cmds"]["economy"]["dice"]["variable10"]))
@@ -97,12 +97,3 @@ module.exports = {
     }
   }
 };
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention him / Milrato Development, when using this Code!
- * @INFO
- */
