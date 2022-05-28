@@ -27,9 +27,9 @@ module.exports = {
       //if the user is a bot, then return
       if (user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable1"]))
       //ensure the economy data
-      ensure_economy_user(client, message.guild.id, user.id)
+      ensure_economy_user(client, user.id)
       //get the latest data
-      var data = client.economy.get(`${message.guild.id}-${user.id}`)
+      var data = client.economy.get(`${user.id}`)
       //set some variables
       var items = 0, itemsvalue = 0;
       //Loop through all items
@@ -63,7 +63,7 @@ module.exports = {
         itemsvalue += prize * data.items[`${itemarray}`];
       }
       //function for yes or no, if its buyable!
-      const p2b = (costs) => (Number(costs) > Number(data.balance)) ? "<:no:833101993668771842>" : "<a:yes:833101995723194437>";
+      const p2b = (costs) => (Number(costs) > Number(data.balance)) ? "❌" : "✅";
       //return some message!
       if (!args[0])
         return message.reply({embeds: [new MessageEmbed()
@@ -175,9 +175,9 @@ module.exports = {
           .setTitle(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable8"]))
           .setDescription(eval(client.la[ls]["cmds"]["economy"]["buy"]["variable9"]))
         ]});
-      client.economy.math(`${message.guild.id}-${user.id}`, "+", amountofbuy, `items.${args[0].toLowerCase()}`)
-      client.economy.math(`${message.guild.id}-${user.id}`, "-", endprize, `balance`)
-      data = client.economy.get(`${message.guild.id}-${user.id}`)
+      client.economy.math(`${user.id}`, "+", amountofbuy, `items.${args[0].toLowerCase()}`)
+      client.economy.math(`${user.id}`, "-", endprize, `balance`)
+      data = client.economy.get(`$${user.id}`)
 
       return message.reply({embeds: [new MessageEmbed()
         .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
@@ -195,12 +195,3 @@ module.exports = {
     }
   }
 };
-/**
-* @INFO
-* Bot Coded by Tomato#6966 | https://discord.gg/milrato
-* @INFO
-* Work for Milrato Development | https://milrato.eu
-* @INFO
-* Please mention him / Milrato Development, when using this Code!
-* @INFO
-*/

@@ -36,9 +36,9 @@ module.exports = {
       if (!user || user == null || user.id == null || !user.id) user = message.author
       if (user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["bank"]["variable2"]))
       //ensure the economy data
-      ensure_economy_user(client, message.guild.id, user.id)
+      ensure_economy_user(client, user.id)
       //get the economy data 
-      const data = client.economy.get(`${message.guild.id}-${user.id}`)
+      const data = client.economy.get(`${user.id}`)
       var items = 0;
       var itemsvalue = 0;
       for (const itemarray in data.items) {
@@ -87,12 +87,3 @@ module.exports = {
     }
   }
 };
-/**
-* @INFO
-* Bot Coded by Tomato#6966 | https://discord.gg/milrato
-* @INFO
-* Work for Milrato Development | https://milrato.eu
-* @INFO
-* Please mention him / Milrato Development, when using this Code!
-* @INFO
-*/
