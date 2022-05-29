@@ -28,9 +28,9 @@ module.exports = {
     if(user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["sell"]["variable1"]))
       
     //ensure the economy data
-    ensure_economy_user(client, message.guild.id, user.id)
+    ensure_economy_user(client, user.id)
     //get the economy data 
-    var data = client.economy.get(`${message.guild.id}-${user.id}`)
+    var data = client.economy.get(`${user.id}`)
     var items = 0;
     var itemsvalue = 0;
     var theitems = [];
@@ -161,9 +161,9 @@ module.exports = {
 
       var endprize = (prize * amountofbuy) * 0.9;
       
-      client.economy.math(`${message.guild.id}-${user.id}`, "-", amountofbuy, `items.${args[0].toLowerCase()}`)
-      client.economy.math(`${message.guild.id}-${user.id}`, "+", endprize, `balance`)
-      data = client.economy.get(`${message.guild.id}-${user.id}`)
+      client.economy.math(`${user.id}`, "-", amountofbuy, `items.${args[0].toLowerCase()}`)
+      client.economy.math(`${user.id}`, "+", endprize, `balance`)
+      data = client.economy.get(`${user.id}`)
 
       return message.reply({embeds: [new MessageEmbed()
         .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
@@ -182,12 +182,3 @@ module.exports = {
   }
 }
 };
-/**
-* @INFO
-* Bot Coded by Tomato#6966 | https://discord.gg/milrato
-* @INFO
-* Work for Milrato Development | https://milrato.eu
-* @INFO
-* Please mention him / Milrato Development, when using this Code!
-* @INFO
-*/

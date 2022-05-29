@@ -49,12 +49,12 @@ module.exports = {
     //if user or the topay user is a bot, return error
     if(user.bot || topay.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["pay"]["variable6"]))
     //ensure the economy data
-    ensure_economy_user(client, message.guild.id, user.id);
+    ensure_economy_user(client, user.id);
     //ensure the economy data
-    ensure_economy_user(client, message.guild.id, topay.id)
+    ensure_economy_user(client, topay.id)
     //get the economy data 
-    let data = client.economy.get(`${message.guild.id}-${user.id}`)
-    let data2 = client.economy.get(`${message.guild.id}-${topay.id}`)
+    let data = client.economy.get(`$${user.id}`)
+    let data2 = client.economy.get(`${topay.id}`)
 
     if(payamount <= 0)
     return message.reply({embeds: [new MessageEmbed()
@@ -70,10 +70,10 @@ module.exports = {
         .setTitle(eval(client.la[ls]["cmds"]["economy"]["pay"]["variable8"]))
       ]});
   
-    client.economy.math(`${message.guild.id}-${user.id}`, "-", payamount, "balance")
-    client.economy.math(`${message.guild.id}-${topay.id}`, "+", payamount, "balance")
-    data = client.economy.get(`${message.guild.id}-${user.id}`)
-    data2 = client.economy.get(`${message.guild.id}-${topay.id}`)
+    client.economy.math(`${user.id}`, "-", payamount, "balance")
+    client.economy.math(`${topay.id}`, "+", payamount, "balance")
+    data = client.economy.get(`${user.id}`)
+    data2 = client.economy.get(`${topay.id}`)
     //return some message!
     return message.reply({embeds: [new MessageEmbed()
       .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
@@ -92,12 +92,3 @@ module.exports = {
   }
 }
 };
-/**
-* @INFO
-* Bot Coded by Tomato#6966 | https://discord.gg/milrato
-* @INFO
-* Work for Milrato Development | https://milrato.eu
-* @INFO
-* Please mention him / Milrato Development, when using this Code!
-* @INFO
-*/

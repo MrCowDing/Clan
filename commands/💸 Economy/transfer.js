@@ -44,12 +44,12 @@ module.exports = {
     //if user or the totransfer user is a bot, return error
     if(user.bot || totransfer.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable5"]))
     //ensure the economy data
-    ensure_economy_user(client, message.guild.id, user.id);
+    ensure_economy_user(client, user.id);
     //ensure the economy data
-    ensure_economy_user(client, message.guild.id, totransfer.id)
+    ensure_economy_user(client, totransfer.id)
     //get the economy data 
-    let data = client.economy.get(`${message.guild.id}-${user.id}`)
-    let data2 = client.economy.get(`${message.guild.id}-${totransfer.id}`)
+    let data = client.economy.get(`${user.id}`)
+    let data2 = client.economy.get(`${totransfer.id}`)
 
     if(transferamount <= 0)
     return message.reply({embeds: [new MessageEmbed()
@@ -65,10 +65,10 @@ module.exports = {
         .setTitle(eval(client.la[ls]["cmds"]["economy"]["transfer"]["variable7"]))
       ]});
   
-    client.economy.math(`${message.guild.id}-${user.id}`, "-", transferamount, "balance")
-    client.economy.math(`${message.guild.id}-${totransfer.id}`, "+", transferamount, "balance")
-    data = client.economy.get(`${message.guild.id}-${user.id}`)
-    data2 = client.economy.get(`${message.guild.id}-${totransfer.id}`)
+    client.economy.math(`${user.id}`, "-", transferamount, "balance")
+    client.economy.math(`${totransfer.id}`, "+", transferamount, "balance")
+    data = client.economy.get(`${user.id}`)
+    data2 = client.economy.get(`${totransfer.id}`)
     //return some message!
     return message.reply({embeds: [new MessageEmbed()
       .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
@@ -87,12 +87,3 @@ module.exports = {
   }
 }
 };
-/**
-* @INFO
-* Bot Coded by Tomato#6966 | https://discord.gg/milrato
-* @INFO
-* Work for Milrato Development | https://milrato.eu
-* @INFO
-* Please mention him / Milrato Development, when using this Code!
-* @INFO
-*/

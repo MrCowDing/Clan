@@ -27,8 +27,8 @@ module.exports = {
     if(user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["withdraw"]["variable1"]))
     
       //ensure the economy data
-      ensure_economy_user(client, message.guild.id, user.id)
-    var data = client.economy.get(`${message.guild.id}-${user.id}`)
+      ensure_economy_user(client, user.id)
+    var data = client.economy.get(`${user.id}`)
     if(!args[0])
       return message.reply({embeds: [new MessageEmbed()
           .setColor(es.wrongcolor)
@@ -37,13 +37,13 @@ module.exports = {
           .setDescription(eval(client.la[ls]["cmds"]["economy"]["withdraw"]["variable3"]))
         ]});
     if(args[0].toLowerCase() == "all"){
-      client.economy.math(`${message.guild.id}-${user.id}`, "+", data.bank, "balance")
+      client.economy.math(`${user.id}`, "+", data.bank, "balance")
       //set the current time to the db
-      client.economy.set(`${message.guild.id}-${user.id}`, 0, "bank")
+      client.economy.set(`${user.id}`, 0, "bank")
 
       var withdrawed = data.bank;
 
-      data = client.economy.get(`${message.guild.id}-${user.id}`)
+      data = client.economy.get(`${user.id}`)
 
       return message.reply({embeds: [new MessageEmbed()
         .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
@@ -67,10 +67,10 @@ module.exports = {
           .setTitle(eval(client.la[ls]["cmds"]["economy"]["withdraw"]["variable7"]))
         ]});
       
-      client.economy.math(`${message.guild.id}-${user.id}`, "+", amount, "balance")
-      client.economy.math(`${message.guild.id}-${user.id}`, "-", amount, "bank")
+      client.economy.math(`${user.id}`, "+", amount, "balance")
+      client.economy.math(`${user.id}`, "-", amount, "bank")
       //get the data
-      data = client.economy.get(`${message.guild.id}-${user.id}`)
+      data = client.economy.get(`${user.id}`)
       //show the message
       return message.reply({embeds: [new MessageEmbed()
         .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
@@ -90,12 +90,3 @@ module.exports = {
   }
 }
 };
-/**
-* @INFO
-* Bot Coded by Tomato#6966 | https://discord.gg/milrato
-* @INFO
-* Work for Milrato Development | https://milrato.eu
-* @INFO
-* Please mention him / Milrato Development, when using this Code!
-* @INFO
-*/

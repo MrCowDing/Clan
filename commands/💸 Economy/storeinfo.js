@@ -27,8 +27,8 @@ module.exports = {
     if(user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["storeinfo"]["variable2"]))
     
       //ensure the economy data
-      ensure_economy_user(client, message.guild.id, user.id)
-    const data = client.economy.get(`${message.guild.id}-${user.id}`)
+      ensure_economy_user(client, user.id)
+    const data = client.economy.get(`${user.id}`)
     var items = 0;
     var itemsvalue = 0;
     for (const itemarray in data.items){
@@ -60,7 +60,7 @@ module.exports = {
       }
       itemsvalue += prize * data.items[`${itemarray}`];
     }
-    const p2b = (costs) => (Number(costs) > Number(data.balance)) ? "<:no:833101993668771842>" : "<a:yes:833101995723194437>";
+    const p2b = (costs) => (Number(costs) > Number(data.balance)) ? "❌" : "✅";
     //return some message!
     return message.reply({embeds: [new MessageEmbed()
       .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
@@ -107,12 +107,3 @@ module.exports = {
   }
 }
 };
-/**
-* @INFO
-* Bot Coded by Tomato#6966 | https://discord.gg/milrato
-* @INFO
-* Work for Milrato Development | https://milrato.eu
-* @INFO
-* Please mention him / Milrato Development, when using this Code!
-* @INFO
-*/

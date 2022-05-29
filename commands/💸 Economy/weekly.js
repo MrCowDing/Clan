@@ -26,9 +26,9 @@ module.exports = {
       if(user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["weekly"]["variable1"]))
       
       //ensure the economy data
-      ensure_economy_user(client, message.guild.id, user.id)
+      ensure_economy_user(client, user.id)
       //get the economy data 
-      let data = client.economy.get(`${message.guild.id}-${user.id}`)
+      let data = client.economy.get(`${user.id}`)
       //get the delays
       let timeout = 86400000*7;
 
@@ -70,12 +70,3 @@ module.exports = {
     }
   }
 };
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention him / Milrato Development, when using this Code!
- * @INFO
- */

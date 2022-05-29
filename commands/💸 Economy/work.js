@@ -26,7 +26,7 @@ module.exports = {
       //ensure the economy data
       ensure_economy_user(client, message.guild.id, user.id)
       if(user.bot) return message.reply(eval(client.la[ls]["cmds"]["economy"]["work"]["variable1"]))
-      let data = client.economy.get(`${message.guild.id}-${user.id}`)
+      let data = client.economy.get(`${user.id}`)
       //time delay for the Work
       let timeout = 25 * 60 * 1000;
       //if user is on cooldown error
@@ -49,11 +49,11 @@ module.exports = {
         if(amount > 200) amount = amount - Math.floor(Math.random() * 50) + 1;
         amount = amount * data.black_market.boost.multiplier
         //add the Money to the User's Balance in this Guild
-        client.economy.math(`${message.guild.id}-${user.id}`, "+", amount, "balance")
+        client.economy.math(`${user.id}`, "+", amount, "balance")
         //set the current time to the db
-        client.economy.set(`${message.guild.id}-${user.id}`, Date.now(), "work")
+        client.economy.set(`${user.id}`, Date.now(), "work")
         //get the new data
-        data = client.economy.get(`${message.guild.id}-${user.id}`)
+        data = client.economy.get(`${user.id}`)
         //return some message!
         return message.reply({embeds: [new MessageEmbed()
           .setColor(es.color).setThumbnail(es.thumb ? es.footericon && (es.footericon.includes("http://") || es.footericon.includes("https://")) ? es.footericon : client.user.displayAvatarURL() : null)
@@ -72,12 +72,3 @@ module.exports = {
     }
   }
 };
-/**
- * @INFO
- * Bot Coded by Tomato#6966 | https://discord.gg/milrato
- * @INFO
- * Work for Milrato Development | https://milrato.eu
- * @INFO
- * Please mention him / Milrato Development, when using this Code!
- * @INFO
- */
